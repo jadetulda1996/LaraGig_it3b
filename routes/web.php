@@ -42,6 +42,7 @@ Route::get('/users/{id}', function ($id) {
 Route::get('/listings', function(){
 
     $listings = Listing::all();
+
     //select * from listings
 
     return view('listings', compact('listings'));
