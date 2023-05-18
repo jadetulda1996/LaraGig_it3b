@@ -15,47 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (Request $request) {
-    return view('welcome');
-});
-
-
-Route::get('/users/{id}', function ($id) {
-    $a = 'test';
-    $b = ['a','b','c'];
-    $listings = [
-        [
-            'id' => 1,
-            'title' => 'Listing One',
-            'description' => 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum'
-        ],
-        [
-            'id' => 2,
-            'title' => 'Listing Two',
-            'description' => 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum'
-        ],
-    ];
-    return view('about',compact(['id','a', 'b', 'listings']));
-});
-
 //All listings
-Route::get('/listings', function(){
+Route::get('/', function(){
 
     $listings = Listing::all();
-
-    //select * from listings
+    // select * from listings
 
     return view('listings', compact('listings'));
 });
 
 // Single Listing
-Route::get('/listings/{id}',function($id){
+Route::get('/listings/{listing}',function(Listing $listing){
 
-    $listing = Listing::find($id);
+    // $listing = Listing::find($id);
 
-    //select * from listings where id=$id
-
-    // dd($listing);
+    // if(!$listing)
+    //     abort('404');
 
     return view('listing',compact('listing'));
 });
@@ -82,4 +57,22 @@ Route::get('/listings/{id}',function($id){
 // Route::get('/aboutsss', function () {
 //     return 'Aboutsss PHP';
 //     // return view('welcome');
+// });
+
+// Route::get('/users/{id}', function ($id) {
+//     $a = 'test';
+//     $b = ['a','b','c'];
+//     $listings = [
+//         [
+//             'id' => 1,
+//             'title' => 'Listing One',
+//             'description' => 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum'
+//         ],
+//         [
+//             'id' => 2,
+//             'title' => 'Listing Two',
+//             'description' => 'Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum'
+//         ],
+//     ];
+//     return view('about',compact(['id','a', 'b', 'listings']));
 // });
