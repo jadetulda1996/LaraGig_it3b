@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,24 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 //All listings
-Route::get('/', function(){
+Route::get('/', [ListingController::class, 'index']);
 
-    $listings = Listing::all();
-    // select * from listings
+//Show Form
+Route::get('/listings/create', [ListingController::class, 'create']);
 
-    return view('listings', compact('listings'));
-});
+Route::post('/listings', [ListingController::class, 'store']);
+
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
 
 // Single Listing
-Route::get('/listings/{listing}',function(Listing $listing){
+Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
-    // $listing = Listing::find($id);
-
-    // if(!$listing)
-    //     abort('404');
-
-    return view('listing',compact('listing'));
-});
+Route::put('/listings/{listing}', [ListingController::class, 'update']);
 
 // <a href="/users/posts/comments">
 // <a href="{{ route('users') }}">
